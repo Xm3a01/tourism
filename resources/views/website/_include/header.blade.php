@@ -5,8 +5,8 @@
                 <div class="row">
                     <div class="col-sm-12 col-md-6">
                         <div class="contactTop">
-                            <span class="icofont-phone">  0665 25 26 56 </span>
-                            <span class="icofont-email">  Gaassisahmed@gmail.com </span>
+                            <span class="icofont-phone">   </span>
+                            <span class="icofont-email">   </span>
                         </div>
                     </div>
                     <div class="col-sm-12 col-md-6" >

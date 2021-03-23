@@ -7,16 +7,16 @@
         <div class="collapse navbar-collapse" id="navbar">
             <ul class="navbar-nav mainMenu">
                 <li class="nav-item  active">
-                    <a class="nav-link js-scroll-trigger" href="#home"> الرئسيه <span class="sr-only">(current)</span></a>
+                    <a class="nav-link js-scroll-trigger" href="/"> الرئسيه <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link js-scroll-trigger" href="#about"> من نحن </a>
+                    <a class="nav-link js-scroll-trigger" href="/#about"> من نحن </a>
                 </li>
                 <li class="nav-item" >
-                    <a class="nav-link js-scroll-trigger" href="#feature"> الشركات </a>
+                    <a class="nav-link js-scroll-trigger" href="{{route('company')}}"> الشركات </a>
                 </li>
                 <li class="nav-item ">
-                    <a class="nav-link js-scroll-trigger" href="#pricing"> الأماكن السياحيه </a>
+                    <a class="nav-link js-scroll-trigger" href="{{route('place')}}"> الأماكن السياحيه </a>
                 </li>
             </ul>
         </div>

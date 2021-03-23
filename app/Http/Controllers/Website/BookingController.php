@@ -1,41 +1,34 @@
 <?php
 
-namespace App\Http\Controllers\Dashboard;
+namespace App\Http\Controllers\Website;
 
-use App\Http\Controllers\Controller;
+use App\Place;
+use App\Booking;
+use App\Company;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
-class SettingController extends Controller
+class BookingController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    
     public function index()
     {
-        //
+        $comapnies = Company::latest()->get();
+        $places = Place::latest()->get();
+
+        return view('website.booking' , [
+            'companies' => $comapnies,
+            'places' => $places
+        ]);
+        return view('website.booking');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        //
+        // return $request->all();
+        Booking::create($request->all());
+        \Session::flash('success' , 'الارسال بنجاح');
+        return back();
     }
 
     /**

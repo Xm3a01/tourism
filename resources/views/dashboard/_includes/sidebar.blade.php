@@ -2,7 +2,7 @@
     <div class="logo">
         <a href="/dashboard" class="simple-text logo-small">
          <div class="logo-image-big">
-             Jungle-Dashboard
+             Jungle-Dashboard {{Auth::user()->is_admin}}
           {{-- <img src="/assets/images/favico.ico" height="90" width="100" class="col-md-6 offset-md-3"> --}}
         </div>
         </a>
@@ -21,18 +21,21 @@
                     <p>Companies</p>
                 </a>
             </li>
+            @if(Auth::user()->is_admin == 1)
             <li class="{{ request()->is('*places*') ? 'active' : '' }}">
                 <a href="{{ route('places.index') }}">
                     <i class="nc-icon nc-caps-small"></i>
                     <p>Places</p>
                 </a>
             </li>
-            <li class="{{ request()->is('*settings*') ? 'active' : '' }}">
-                <a href="{{ route('settings.index') }}">
-                    <i class="nc-icon nc-edit-02"></i>
-                    <p>Setting</p>
+
+            <li class="{{ request()->is('*bookings*') ? 'active' : '' }}">
+                <a href="{{ route('bookings.index') }}">
+                    <i class="nc-icon nc-caps-small"></i>
+                    <p>Booking</p>
                 </a>
             </li>
+            @endif
         </ul>
     </div>
 </div>

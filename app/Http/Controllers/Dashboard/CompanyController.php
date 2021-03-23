@@ -2,84 +2,70 @@
 
 namespace App\Http\Controllers\Dashboard;
 
-use App\Http\Controllers\Controller;
+use App\Company;
 use Illuminate\Http\Request;
+use App\Traits\AttachmentTrait;
+use App\Http\Controllers\Controller;
 
 class CompanyController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+   use AttachmentTrait;
+
+   
     public function index()
     {
-        //
+        $companies = Company::latest()->paginate(100);
+
+        return view('dashboard.companies.index' , ['companies' => $companies]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    
     public function create()
     {
-        //
+        return view('dashboard.companies.create');
+
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+    
     public function store(Request $request)
     {
-        //
+        $company = Company::create($request->except('image'));
+        if($request->has('image')){
+           $this->singleFile($request->image , $company , 'companies');
+        }
+
+        \Session::flash('success' , 'تم الحفظ بنجاح');
+        return redirect()->route('companies.index');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
+
+    public function edit(Company $company)
     {
-        //
+        return view('dashboard.companies.edit' , ['company' => $company]);
+
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
+    public function update(Request $request, Company $company)
     {
-        //
+        $company->update($request->except('image'));
+        if($request->has('image')){
+            $company->clearMediaCollection('companies');
+            $this->singleFile($request->image , $company , 'companies');
+        }
+
+        \Session::flash('success' , 'تم التعديل بنجاح');
+        return redirect()->route('companies.index');
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
+    public function destroy(Company $company)
     {
-        //
-    }
+        if($company->image){
+          $company->clearMediaCollection('companies');
+        }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        $company->delete();
+
+        \Session::flash('success' , 'تم الحذف بنجاح');
+        return redirect()->route('companies.index');
     }
 }

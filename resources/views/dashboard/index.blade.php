@@ -35,6 +35,7 @@
             </div>
         </div>
 
+        @if(Auth::user()->is_admin == 1)
         <div class="col-lg-3 col-md-6 col-sm-6">
             <div class="card card-stats">
                 <div class="card-body ">
@@ -66,6 +67,7 @@
                 </div>
             </div>
         </div>
+        @endif
 
     </div>
 

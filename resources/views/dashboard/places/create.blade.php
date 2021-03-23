@@ -1,26 +1,26 @@
-@extends('admins.dashboard.master')
+@extends('dashboard.master')
 
 @section('content')
 
     <div class="col-md-8">
         <div class="card card-user">
             <div class="card-header">
-                <h5 class="card-title">Add Event</h5>
+                <h5 class="card-title">Add Place</h5>
             </div>
             <div class="card-body">
-                <form action="{{route('events.store')}}" method="POST" enctype="multipart/form-data">
+                <form action="{{route('places.store')}}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="row">
                         <div class="col-md-6 pr-1">
                             <div class="form-group">
-                                <label>Event Name</label>
-                                <input type="text" class="form-control" placeholder="Name" name="name">
+                                <label>Name</label>
+                                <input type="text" class="form-control" placeholder="Name" name="name" required>
                             </div>
                         </div>
                         <div class="col-md-6 pl-1">
                             <div class="form-group">
-                                <label>Plase</label>
-                                <input type="text" class="form-control" placeholder="Address" name="place">
+                                <label>Location</label>
+                                <input type="text" class="form-control" placeholder="Address" name="location" required>
                             </div>
                         </div>
                     </div>
@@ -32,13 +32,6 @@
 
                             </div>
                         </div>
-                        <div class="col-md-6 pl-1">
-                            <div class="form-group">
-                                <label>Date</label>
-                                <input type="datetime-local" class="form-control" placeholder=" " name="date">
-
-                            </div>
-                        </div>
                     </div>
                     <div class="row">
                         
@@ -46,7 +39,7 @@
 
                             <div class="form-group">
                                 <label>Description</label>
-                                <textarea class="form-control textarea" name="content"></textarea>
+                                <textarea class="form-control textarea" name="description" required></textarea>
                             </div>
                         </div>
                     </div>

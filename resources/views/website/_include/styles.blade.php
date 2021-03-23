@@ -12,6 +12,7 @@
 <link rel="stylesheet" href="{{asset('assets/css/main.css')}}" />
 <!-- RTL CSS-->
 <link rel="stylesheet" href="{{asset('assets/css/rtl.css')}}" />
+<link href="{{asset('assets/css/toastr-rtl.min.css')}}" rel="stylesheet" />
 <!-- Responsive css CSS --> 
 <link rel="stylesheet" href="{{asset('assets/css/responsive.css')}}" />
 <!-- Vegas  CSS --> 

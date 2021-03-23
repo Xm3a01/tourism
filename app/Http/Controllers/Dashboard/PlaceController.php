@@ -2,84 +2,68 @@
 
 namespace App\Http\Controllers\Dashboard;
 
-use App\Http\Controllers\Controller;
+use App\Place;
 use Illuminate\Http\Request;
+use App\Traits\AttachmentTrait;
+use App\Http\Controllers\Controller;
 
 class PlaceController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    use AttachmentTrait;
+
+   
     public function index()
     {
-        //
+        $places = Place::latest()->paginate(100);
+
+        return view('dashboard.places.index' , ['places' => $places]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    
     public function create()
     {
-        //
+        return view('dashboard.places.create');
+
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+    
     public function store(Request $request)
     {
-        //
+        $place = Place::create($request->except('image'));
+        $this->singleFile($request->image , $place , 'places');
+
+        \Session::flash('success' , 'تم الحفظ بنجاح');
+        return redirect()->route('places.index');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
+
+    public function edit(Place $place)
     {
-        //
+        return view('dashboard.places.edit' , ['place' => $place]);
+
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
+    public function update(Request $request, Place $place)
     {
-        //
+        $place->update($request->except('image'));
+        if($request->has('image')){
+            $place->clearMediaCollection('places');
+            $this->singleFile($request->image , $place , 'places');
+        }
+
+        \Session::flash('success' , 'تم التعديل بنجاح');
+        return redirect()->route('places.index');
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
+    public function destroy(Place $place)
     {
-        //
-    }
+        if($place->image){
+          $place->clearMediaCollection('places');
+        }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        $place->delete();
+
+        \Session::flash('success' , 'تم الحذف بنجاح');
+        return redirect()->route('places.index');
     }
 }

@@ -26,7 +26,7 @@
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-sm-6">
-                        <div class="copyRight"><p> @ All right Reserved Your Company, Theme Created by <a href="http://www.premade.site">Premade.site</a>  </p></div>
+                        <div class="copyRight"><p>  <a href="/">Our team</a>  </p></div>
                 </div>
                 <div class="col-sm-6">
                     <ul class="nav socialNav">
